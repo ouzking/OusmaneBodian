@@ -22,7 +22,9 @@ class GestionBudget:
         Loisir = int(input("Donnez la somme effectuée du Loisir:"))
         Tontine = int(input("La somme versée de la Tontine:"))
         Factures_courant = int(input("Donnez la somme des factures:"))
-        cursor.execute("INSERT INTO depense('loyer', 'Manger', 'Transport', 'Loisir', 'Tontine', 'Factures_courant') VALUES (?,?,?,?,?,?)",(loyer, Manger, Transport, Loisir, Tontine, Factures_courant))
+        requette = "CREATE TABLE depense_total (id INTEGER PRIMARY KEY AUTOINCREMENT,loyer TEXT, Manger TEXT, Transport TEXT, Loisir TEXT, Tontine TEXT, Factures_courant TEXT)"
+        requette = "INSERT INTO depense_total('loyer', 'Manger', 'Transport', 'Loisir', 'Tontine', 'Factures_courant') VALUES (?,?,?,?,?,?)"
+        cursor.execute(requette, (loyer, Manger, Transport, Loisir, Tontine, Factures_courant))
         connection.commit()
         print("les dépenses sont ajoutées")
         depense_totale = loyer+Manger+Transport+Loisir+Tontine+Factures_courant
@@ -37,7 +39,9 @@ class GestionBudget:
         Salaire = int(input("La somme de votre salaire:"))
         Business = int(input("la somme gagnée du business:"))
         tontine = int(input("La somme gagnée à la tontine:"))
-        cursor.execute("INSERT INTO budget('Salaire', 'Business', 'tontine') VALUES(?,?,?)",(Salaire, Business, tontine))
+        requette = "CREATE TABLE revenu_total (id INTEGER PRIMARY KEY AUTOINCREMENT, Salaire TEXT, Business TEXT, tontine TEXT)"
+        requette = "INSERT INTO revenu_total('Salaire', 'Business', 'tontine') VALUES(?,?,?)"
+        cursor.execute(requette, (Salaire, Business, tontine))
         connection.commit()
         print("vos revenus ont été consulté")
         revenu_totale = Salaire+Business+tontine
